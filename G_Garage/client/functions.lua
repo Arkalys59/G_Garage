@@ -1,3 +1,30 @@
+Citizen.CreateThread(function()
+	while ESX == nil do 
+        TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end) 
+        Citizen.Wait(5000) 
+    end
+    if ESX.IsPlayerLoaded() then 
+        ESX.PlayerData = ESX.GetPlayerData() 
+    end
+end)
+
+RegisterNetEvent('esx:playerLoaded') 
+AddEventHandler('esx:playerLoaded', function(xPlayer) 
+    ESX.PlayerData = xPlayer 
+end)
+
+function GetDataGarage()
+    ESX.TriggerServerCallback('G_Garage:VehicleArrayGarage', function(data)
+        Array.Garage = data
+    end)
+end
+
+function GetDataPound()
+    ESX.TriggerServerCallback('G_Garage:VehicleArrayPound', function(data)
+        Array.Pound = data
+    end)
+end
+	
 function SpawnVehicle(vehicle, plate, spawn)
 	ESX.Game.SpawnVehicle(vehicle.model, {x = spawn.x, y = spawn.y, z = spawn.z}, spawn.w, function(xVehicle)
 		ESX.Game.SetVehicleProperties(xVehicle, vehicle)
@@ -50,4 +77,9 @@ Citizen.CreateThread(function()
         AddTextComponentSubstringPlayerName(G_Garage.Pound.Blip.Title)
         EndTextCommandSetBlipName(blip)
     end
+end)
+
+Citizen.CreateThread(function()
+    GetDataGarage()
+    GetDataPound()
 end)
