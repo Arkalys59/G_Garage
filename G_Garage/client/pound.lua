@@ -36,6 +36,8 @@ function Pound(v)
                                         SpawnVehicle(model, plate, v.spawn)
                                         RageUI.CloseAll()
                                         pound = false
+                                        Wait(200)
+                                        GetDataPound()
                                     else
                                         ESX.ShowNotification("Vous n'avez pas assez d'argent")
                                     end
@@ -63,10 +65,7 @@ Citizen.CreateThread(function()
                     wait = 1                      
                     ESX.ShowHelpNotification("~INPUT_TALK~ pour ouvrir la ~b~Fourrière")
                     if IsControlJustPressed(1,51) then
-                        ESX.TriggerServerCallback('G_Garage:VehicleArrayPound', function(data)
-                            Array.Pound = data
-                        end)
-                        Wait(100)
+                        GetDataPound()
                         Pound(v)
                     end
                 end
