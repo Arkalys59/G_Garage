@@ -34,6 +34,8 @@ function Garage(v)
                                 SpawnVehicle(model, plate, v.Get.spawn)
                                 RageUI.CloseAll()
                                 garage = false
+                                Wait(200)
+                                GetDataGarage()
                             end
                         })      
                     end
@@ -57,10 +59,7 @@ Citizen.CreateThread(function()
                     wait = 1                      
                     ESX.ShowHelpNotification("~INPUT_TALK~ pour ouvrir le ~b~Garage")
                     if IsControlJustPressed(1,51) then
-						ESX.TriggerServerCallback('G_Garage:VehicleArrayGarage', function(data)
-                            Array.Garage = data
-                        end)
-                        Wait(100)
+                        GetDataGarage()
                         Garage(v)
                     end
                 end
