@@ -5,9 +5,9 @@ TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 ESX.RegisterServerCallback('G_Garage:VehicleArrayGarage', function(source, cb)
 	local dataexport = {}
 	local xPlayer = ESX.GetPlayerFromId(source)
-    MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND `stored` = @stored', { 
+    MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND type = @type AND `stored` = @stored', { 
         ['@owner'] = xPlayer.identifier,
-        ['@Type'] = 'car',
+        ['@type'] = 'car',
         ['@stored'] = true
     }, function(data)
         for _,v in pairs(data) do
